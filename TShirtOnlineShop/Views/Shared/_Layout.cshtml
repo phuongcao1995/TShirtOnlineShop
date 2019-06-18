@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
     <link rel="short icon" type="image/png" href="~/Content/images/logo1.png" />
-
     <title>@ViewBag.Title - HiddenUs</title>
 
     <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
@@ -19,7 +18,7 @@
 </head>
 
 
-<body>
+<body ng-app="App">
 
     <div id="logo">
         <a title="Home" href=@Url.Action("HomePage", "Home")><img src="~/Content/images/logo-2.png" alt="png" /></a>
@@ -68,7 +67,7 @@
             if (Session["CustomerFullName"] != null)
             {
                 <ul class="nav-link">
-                    <li class="nav-item"><a>Hello @Session["CustomerFullName"].ToString()</a></li>     
+                    <li class="nav-item"><a>Hello @Session["CustomerFullName"].ToString()</a></li>
                     <li class="nav-item"><a href=" ~/Home/ShoppingCart"><i class="fa fa-opencart"></i></a></li>
                     <li class="nav-item"><a href=" ~/Home/SearchBar"><i class="fa fa-search"></i></a></li>
                 </ul>
@@ -78,7 +77,8 @@
                 <ul class="nav-link">
                     <li class="nav-item"><a href="~/Home/SignIn"> Sign In</a></li>
                     <li class="nav-item"><a href="~/Home/SignUp">Sign Up</a></li>
-                    <li class="nav-item"><a href=" ~/Home/ShoppingCart"><i class="fa fa-opencart"></i></a></li>
+
+                    <li class="nav-item"><a href=" ~/Order/ShoppingCart"><i class="fa fa-shopping-cart"></i></a></li>
                     <li class="nav-item"><a href=" ~/Home/SearchBar"><i class="fa fa-search"></i></a></li>
                 </ul>
             }
@@ -140,6 +140,10 @@
     </div>
 
     @RenderSection("scripts", required: false)
-
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="~/Content/lib/dirPagination.js"></script>
+    @RenderSection("angularjs", required: false)
 </body>
 </html>

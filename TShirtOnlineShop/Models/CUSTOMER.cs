@@ -11,24 +11,23 @@ namespace TShirtOnlineShop.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class CUSTOMER
+    
+    public partial class Customer
     {
-        public System.Guid CustomerID { get; set; }
-
-        [Required]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int ID { get; set; }
         public string CustomerFullName { get; set; }
-
-        [Required]
         public string CustomerPhoneNumber { get; set; }
-        [Required]
-
         public string CustomerEmail { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
         public string CustomerPassword { get; set; }
+        public Nullable<int> Type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

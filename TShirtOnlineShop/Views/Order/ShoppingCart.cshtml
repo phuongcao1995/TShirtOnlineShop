@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+@section css
+{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+@section angularjs
+{
+    <script src="~/Scripts/angularjs/MenController.js"></script>
+    <script src="~/Scripts/angularjs/OrderController.js"></script>
+}
+<div id="content" ng-controller="OrderController">
+    <div id="eptcart" ng-show="ShoppingCart.length==0">
+        <h2 style="padding: 10px; margin-top: 40px; font-size: 40px"><b>Checkout</b></h2>
+        <p style="padding-bottom: 40px; font-size: 20px">Your cart is empty! Please add some products.</p>
+
+        <form action="/Home/HomePage">
+            <button class="btn" type="submit">Choose products <i class="fa fa-angle-double-right"></i> </button>
+        </form>
+    </div>
+
+    <div id="cart-container" style="margin-bottom: 250px" ng-show="ShoppingCart.length>0">
+        <div id="cart-header">
+            <h2 style="font-weight: bold">Your cart</h2>
+        </div>
+
+        <div class="product-container">
+
+            <div id="item2">
+                <div class="right-content">
+                    <div id="price">
+                        <div class="price-item">
+                            <div class="left">
+                                <p>Subtotal</p>
+                            </div>
+
+                            <div class="right">
+                                <p>{{Subtotal}}</p>
+                            </div>
+
+                            <div class="left">
+                                <p>Shipping fee</p>
+                            </div>
+
+                            <div class="right">
+                                <p>$3.31</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @*<div class="promotion">
+                        <form action="#">
+
+                            <input type="text" name="email" placeholder="Enter your promotion code" />
+                            <button>Apply</button>
+
+                        </form>
+                    </div>*@
+
+                    <div class="total">
+                        <div class="price-item">
+                            <div class="left">
+                                <h4>Total</h4>
+                            </div>
+
+                            <div class="right">
+                                <h4>$41.31</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" name="button"> CHECKOUT</button>
+                </div>
+            </div>
+
+            <div class="wrap-product">
+                <div class="product" ng-repeat="item in ShoppingCart">
+                    <div class="cart-image">
+                        <img src="{{item.Product.ImagesName[0]}}" />
+                    </div>
+
+                    <div class="cart-caption">
+                        <h3>{{item.Product.CategoryName}}: {{item.Name}}</h3>
+                        <div class="detail">
+                            <p>
+                                Size:  {{item.Product.Size}}<br>
+                                Color: {{item.Product.Colors}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="price-caption">
+                        <p>{{(item.Quantity*item.Product.Price)|currency}}</p>
+                        <form action="#" method="post">
+                            <label for="quantity">Quantity</label>
+                            <input type="number"min="0"  name="quantity" value="{{item.Quantity}}" ng-model="item.Quantity">
+                        </form>
+                    </div>
+
+                    <div class="remove">
+                        <button type="button" onclick="$(this).parents('product').remove()" name="button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

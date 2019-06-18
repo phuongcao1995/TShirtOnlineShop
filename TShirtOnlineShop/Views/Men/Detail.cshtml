@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css
+{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link href="~/Content/css/search.css" rel="stylesheet" />
+    @*<link rel="stylesheet" type="text/css" href="~/Content/css/ShortSleeves.css">*@
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+<input id="productId" type="hidden" value="@ViewBag.productId" />
+<div id="content" ng-controller="DetailController">
+    <!---breadcrumb------>
+    <div id=bread-container>
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">All products</a></li>
+            <li>
+                <strong>Short Sleeves T-shirt: {{productDetail.Name}}</strong>
+            </li>
+        </ul>
+    </div>
+    <!----productDetail----->
+
+    <div id="detail-container">
+        <div class="detail-container-2-col">
+            <!--col-1-image--->
+            <div class="img-col">
+                <img src="/Content/images/Men1.jpg">
+            </div>
+            <!--col-2-decription---->
+            <div class="sleevesinfo">
+                <h1><strong>Short Sleeves T-shirt: {{productDetail.Name}}</strong></h1>
+                <div><small style="color:#CFCFCF">CODE: {{productDetail.Code}}</small></div>
+                <p>{{productDetail.Description}}</p>
+                <div>
+                    <h2><span style="color:red">{{(1-productDetail.PromotionPrice/100)*productDetail.Price|currency}}</span>&nbsp&nbsp&nbsp&nbsp<del style="color:#CFCFCF" ng-show="productDetail.PromotionPrice>0">{{productDetail.Price|currency}}</del></h2>
+                </div>
+                <div id="size-container">
+                    <div id="title-PD">Size:</div>
+                    <div class="box-size">
+                        <div data-value="S" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="S" ng-checked="productDetail.Size=='S'">
+                            <label for="swatch-S">S</label>
+                        </div>
+                        <div data-value="M" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="M" ng-checked="productDetail.Size=='M'">
+                            <label for="swatch-S">M</label>
+                        </div>
+                        <div data-value="L" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="L" ng-checked="productDetail.Size=='L'">
+                            <label for="swatch-S">L</label>
+                        </div>
+                        <div data-value="XL" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="XL" ng-checked="productDetail.Size=='XL'">
+                            <label for="swatch-S">XL</label>
+                        </div>
+                        <div data-value="XXL" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="XXL" ng-checked="productDetail.Size=='XXL'">
+                            <label for="swatch-S">XXL</label>
+                        </div>
+                        <div data-value="XXXL" class="element-size">
+                            <input id="swatch-S" type="radio" name="option-0" value="XXXL" ng-checked="productDetail.Size=='XXXL'">
+                            <label for="swatch-S">XXXL</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="color-container">
+                    <div id="title-PD">Color:</div>
+                    <div class="box-color">
+                        <div data-value="black" class="element-color">
+                            <input id="swatch-S" type="radio" name="option-1" value="B" ng-checked="productDetail.Colors=='B'" />
+                            <p class="color-click" for="swatch-S" style="background-color:black"></p>
+                        </div>
+                        <div data-value="red" class="element-color">
+                            <input id="swatch-S" type="radio" name="option-1" value="R"  ng-checked="productDetail.Colors=='R'">
+                            <p class="color-click" for="swatch-S" style="background-color:red"></p>
+                        </div>
+                        <div data-value="yellow" class="element-color">
+                            <input id="swatch-S" type="radio" name="option-1" value="Y"  ng-checked="productDetail.Colors=='Y'">
+                            <p class="color-click" for="swatch-S" style="background-color:yellow"></p>
+                        </div>
+                    </div>
+                </div>
+                @*<div id="quantity-container">
+                    <div id="title-PD">Quantity:</div>
+                    <div class="box-quantity">
+                        <div data-value="choose" class="select-quantity">
+                            <input type="number" name="quantity" value="choose" min="1" max="">
+                        </div>
+                    </div>
+                </div>*@
+                <div id="addcart-container">
+                    <button type="submit" class="addCart my-cart-btn" title="addtoCart" ng-click="AddCart(productDetail.ID,productDetail.Name)">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+        <div class="detail-container-1-col">
+            <div id="title-PD">Details</div>
+            <div>
+                <button class="tablink" onclick="openPage('Decription', this, '#E8E8E8' )">Decription</button>
+                <button class="tablink" onclick="openPage('QA', this, '#E8E8E8' )">Q & A</button>
+                <button class="tablink" onclick="openPage('Rate', this, '#E8E8E8' )">Rate</button>
+                <button class="tablink" onclick="openPage('About', this, '#E8E8E8')">About</button>
+
+                <div id="Decription" class="tabcontent">
+                    <h3>Decription</h3>
+                    <p></p>
+                </div>
+
+                <div id="QA" class="tabcontent">
+                    <h3>Q & A</h3>
+                    <p></p>
+                </div>
+
+                <div id="Rate" class="tabcontent">
+                    <h3>Rate</h3>
+                    <p></p>
+                </div>
+
+                <div id="About" class="tabcontent">
+                    <h3>About</h3>
+                    <p></p>
+                </div>
+                <script>
+
+                    function openPage(pageName, elmnt, color) {
+                        var i, tabcontent, tablink;
+                        tabcontent = document.getElementsByClassName("tabcontent");
+                        for (i = 0; i < tabcontent.length; i++) {
+                            tabcontent[i].style.display = "none";
+                        }
+                        tablink = document.getElementsByClassName("tablink");
+                        for (i = 0; i < tablink.length; i++) {
+                            tablink[i].style.backgroundColor = "";
+                        }
+                        document.getElementById(pageName).style.display = "block";
+                        elmnt.style.backgroundColor = color;
+
+
+                    }
+                </script>
+
+
+            </div>
+
+        </div>
+        <div class="detail-container-1-col">
+            <div id="title-PD">Related Products</div>
+            <div class="product-container-4-col">
+                <a href="#">
+                    <div class="item-image-4-col">
+                        <img src="~/Content/images/men6.jpg" />
+                        <img src="~/Content/images/men6-1.jpg" />
+                    </div>
+
+                    <div class="product-caption">
+                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
+                        <p>Price: $19.00</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="item-image-4-col">
+                        <img src="~/Content/images/men7.jpg" />
+                        <img src="~/Content/images/men7-1.jpg" />
+                    </div>
+
+                    <div class="product-caption">
+                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
+                        <p>Price: $19.00</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="item-image-4-col">
+                        <img src="~/Content/images/men8.jpg" />
+                        <img src="~/Content/images/men8-1.jpg" />
+                    </div>
+
+                    <div class="product-caption">
+                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
+                        <p>Price: $19.00</p>
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="item-image-4-col">
+                        <img src="~/Content/images/men11.jpg" />
+                        <img src="~/Content/images/men11-1.jpg" />
+                    </div>
+
+                    <div class="product-caption">
+                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
+                        <p>Price: $19.00</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+@section angularjs
+{
+    <script src="~/Scripts/angularjs/MenController.js"></script>
+    <script src="~/Scripts/angularjs/DetailController.js"></script>
+}

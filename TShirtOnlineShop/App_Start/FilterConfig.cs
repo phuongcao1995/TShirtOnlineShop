@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using TShirtOnlineShop.Utilities;
 
 namespace TShirtOnlineShop
 {
@@ -8,6 +9,7 @@ namespace TShirtOnlineShop
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            Common.InitializeAutoMapper();
         }
     }
 }

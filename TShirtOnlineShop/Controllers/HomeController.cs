@@ -16,6 +16,7 @@ namespace TShirtOnlineShop.Controllers
 
         public ActionResult HomePage()
         {
+            
             return View();
         }
 
@@ -45,7 +46,7 @@ namespace TShirtOnlineShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn([Bind(Include = "CustomerEmail, CustomerPassword")]CUSTOMER customer)
+        public ActionResult SignIn([Bind(Include = "CustomerEmail, CustomerPassword")]Customer customer)
         {
             if (function.SignInSuccess(customer.CustomerEmail, customer.CustomerPassword))
             {
@@ -61,13 +62,13 @@ namespace TShirtOnlineShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignUp([Bind(Include = "CustomerID,CustomerFullName,CustomerPhoneNumber,CustomerEmail,CustomerPassword")]CUSTOMER customer)
+        public ActionResult SignUp([Bind(Include = "CustomerID,CustomerFullName,CustomerPhoneNumber,CustomerEmail,CustomerPassword")]Customer customer)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    customer.CustomerID = Guid.NewGuid();
+                    customer.ID = 1;
 
                     if (function.IsUserExist(customer.CustomerEmail))
                     {
@@ -76,7 +77,7 @@ namespace TShirtOnlineShop.Controllers
                     }
                     else
                     {
-                        db.CUSTOMERs.Add(customer);
+                        db.Customers.Add(customer);
                         db.SaveChanges();
                         string CustomerFullName = function.GetCustomerFullName(customer.CustomerEmail);
                         Session["CustomerFullName"] = CustomerFullName;
