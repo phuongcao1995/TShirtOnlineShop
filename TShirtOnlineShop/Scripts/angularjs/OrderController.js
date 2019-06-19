@@ -4,7 +4,6 @@
         init();
         function init() {
             ShoppingCart();
-      
         };
 
         function ShoppingCart() {
@@ -12,32 +11,42 @@
             $http.get('/Order/GetShoppingCart').then(function (response) {
                 $def.resolve(response.data);
                 $scope.ShoppingCart = response.data;
-                console.log(response.data);
-                //$scope.Subtotal = $scope.ShoppingCart;
-                //console.log($scope.Subtotal);
                 $scope.Subtotal = function () {
                     var total = 0;
-                    //for (var i = 0; i < $scope.ShoppingCart.length; i++) {
-                    //    var product = $scope.ShoppingCart[i].Product;
-                    //    console.log(product);
-                    //    total += (product.Price * product.Quantity);
-                    //}
+                    for (var i = 0; i < $scope.ShoppingCart.length; i++) {
+                        var product = $scope.ShoppingCart[i].Product;
+                        total += (product.Price * $scope.ShoppingCart[i].Quantity);
+                    }
                     return total;
                 }
+        
             }, function () {
                 $def.reject('Error getting roles');
             });
             return $def.promise;
         }
   
-        //$scope.Subtotal = function () {
-        //    var total = 0;
-        //    for (var i = 0; i < $scope.ShoppingCart.length; i++) {
-        //        var product = $scope.ShoppingCart[i].Product;
-        //        console.log(product);
-        //        total += (product.Price * product.Quantity);
-        //    }
-        //    return total;
-        //}
+ 
+        $scope.removeProduct = function (productId) {
+
+            var $def = $q.defer();
+            $http.get('/Order/RemoveProduct', { params: { productId: productId } }).then(function (response) {
+                $def.resolve(response.data);
+                $scope.ShoppingCart = response.data;
+                $scope.Subtotal = function () {
+                    var total = 0;
+                    for (var i = 0; i < $scope.ShoppingCart.length; i++) {
+                        var product = $scope.ShoppingCart[i].Product;
+                        total += (product.Price * $scope.ShoppingCart[i].Quantity);
+                    }
+                    return total;
+                }
+
+            }, function () {
+                $def.reject('Error getting roles');
+            });
+            return $def.promise;
+        }
+
     }]);
 })();

@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="right">
-                                <p>{{Subtotal}}</p>
+                                <p>{{Subtotal()|currency}}</p>
                             </div>
 
                             <div class="left">
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="right">
-                                <p>$3.31</p>
+                                <p>{{Subtotal()*0.1|currency}}</p>
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="right">
-                                <h4>$41.31</h4>
+                                <h4>{{Subtotal()*1.1|currency}}</h4>
                             </div>
                         </div>
                     </div>
@@ -105,12 +105,13 @@
                     </div>
 
                     <div class="remove">
-                        <button type="button" onclick="$(this).parents('product').remove()" name="button"><i class="fa fa-times"></i></button>
+                        <button type="button" id="btnRemove" ng-click="removeProduct(item.ProductID)" @*onclick="$(this).parents('.product').remove();"*@ name="button"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
