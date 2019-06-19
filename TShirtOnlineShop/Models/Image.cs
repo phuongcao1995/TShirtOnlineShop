@@ -11,7 +11,8 @@ namespace TShirtOnlineShop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+
     public partial class Image
     {
         public int ID { get; set; }
@@ -20,5 +21,10 @@ namespace TShirtOnlineShop.Models
         public string Status { get; set; }
     
         public virtual Product Product { get; set; }
+
+        internal static Image FromStream(MemoryStream memoryStream)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

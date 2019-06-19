@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -23,72 +24,54 @@ namespace TShirtOnlineShop.Areas.Admin.Controllers
             var list = db.Products.OrderByDescending(x => x.ID).ToList();
             return Json(Mapper.Map<List<ProductViewModel>>(list), JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult GetCategoryByType(int type)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var category = db.Categories.Where(x=>x.Type==type).ToList();
+            return Json(category, JsonRequestBehavior.AllowGet);
+        }
+        
         public JsonResult ProductDetail(int id)
         {
             var product = db.Products.Find(id);
             return Json(Mapper.Map<ProductViewModel>(product), JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult AddProduct()
+        [HttpPost]
+        public JsonResult AddProduct(ProductViewModel product)
         {
-            var a= UploadImage();
+            System.Drawing.Image img = AspMantraBase64ToImage(product.UpLoad.Split(',')[1]);
+            System.Drawing.Image img2 = AspMantraBase64ToImage(product.UpLoad2.Split(',')[1]);
+            var path = "/Content/images/" + DateTime.Now.Ticks.ToString() + "1.jpg";
+            var path2 = "/Content/images/" + DateTime.Now.Ticks.ToString() + "2.jpg";
+            img.Save(Server.MapPath(path));
+            img2.Save(Server.MapPath(path2));
+            Product Product = Mapper.Map<Product>(product);
+            db.Products.Add(Product);
+            db.SaveChanges();
+            Image image = new Image()
+            {
+                Path = path,
+                ProductID = Product.ID
+            };
+            Image image2 = new Image()
+            {
+                Path = path2,
+                ProductID = Product.ID
+            };
+            db.Images.Add(image);
+            db.Images.Add(image2);
+            db.SaveChanges();
+
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-
-        public string UploadImage()
+        public System.Drawing.Image AspMantraBase64ToImage(string base64String)
         {
-            DateTime dateTime = DateTime.Now;
-            string tick = dateTime.Ticks.ToString();
-            string fname = "";
-            string path = null; ;
-            int size = 0;
-            List<string> LIST_IMAGE_TYPE = new List<string>() { ".jpg", ".jpeg", ".gif", ".png" };
-            List<dynamic> media = new List<dynamic>();
-
-            if (Request.Files.Count > 0)
-            {
-                try
-                {
-                    //  Get all files from Request object  
-                    HttpFileCollectionBase files = Request.Files;
-                    for (int i = 0; i < files.Count; i++)
-                    {
-
-                        HttpPostedFileBase file = files[i];
-                        string extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-
-                        // Checking for Internet Explorer  
-                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
-                        {
-                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
-                            fname = testfiles[testfiles.Length - 1];
-                        }
-                        else
-                        {
-                            fname = file.FileName;
-                            size = file.ContentLength / 1024;
-                        }
-                        if (LIST_IMAGE_TYPE.Contains(extension))
-                        {
-                            fname = Path.Combine(Server.MapPath("~/Content/images"), tick + extension);
-                            file.SaveAs(fname);
-                            path = "/Content/images/" + tick + extension;
-                        }
-
-                        media.Add(new { url = path });
-                    }
-
-                }
-
-                catch (Exception)
-                {
-                    return path;
-                }
-
-            }
-            return path;
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+            return image;
         }
     }
 }

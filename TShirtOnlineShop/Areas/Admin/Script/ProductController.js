@@ -19,7 +19,17 @@
         function ListLog(data) {
             $scope.listProduct = data;
         }
-
+        $scope.GetCategory = function (type) {
+            var $def = $q.defer();
+            $http.get('/Admin/Product/GetCategoryByType', { params: { type: type } }).then(function (response) {
+                $def.resolve(response.data);
+                $scope.listCategory = response.data;
+                console.log($scope.listCategory)
+            }, function () {
+                $def.reject('Error getting roles');
+            });
+            return $def.promise;
+        }
 
         function ShowMessage(data) {
             if (data.status === 1) {
@@ -30,8 +40,9 @@
 
         }
         $scope.AddProduct = function (product, m) {
+            console.log(product);
             var $def = $q.defer();
-            $http.get('/Admin/Product/AddProduct').then(function (response) {
+            $http.post('/Admin/Product/AddProduct', { product: product }).then(function (response) {
                 $def.resolve(response.data);
                 $scope.listProduct = response.data;
                 console.log($scope.listProduct);

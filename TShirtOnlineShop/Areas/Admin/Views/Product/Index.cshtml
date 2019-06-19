@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div id="content" ng-controller="ProductController">
@@ -11,15 +13,12 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Log List</h1>
+        <h1 class="h3 mb-2 text-gray-800">Log Product</h1>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="row">
                 <button class="btn btn-primary btn-add-new" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus"></i> Add </button>
             </div>
-
-
-
 
             <div class="card-body">
                 <div class="table-responsive">
@@ -36,6 +35,10 @@
                                 </th>
                                 <th class="sort" ng-click="sort('IncidentTyleName')">
                                     Code
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Type
                                     <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
                                 </th>
                                 <th class="sort" ng-click="sort('IncidentTyleName')">
@@ -64,12 +67,13 @@
                         </thead>
                         <tbody>
                             <tr dir-paginate="item in listProduct |orderBy:sortKey:reverse| itemsPerPage:itemsPerPage" ng-show="listProduct.length>0">
-                                <td><img width="50" height="50" src="{{item.ImagesName[0]}}"/></td>
+                                <td><img width="50" height="50" src="{{item.ImagesName[0]}}" /></td>
                                 <td> {{item.Name}}</td>
                                 <td>{{item.Code}}</td>
+                                <td>{{item.TypeName}}</td>
                                 <td>{{item.CategoryName}}</td>
                                 <td>{{item.Price |currency}}</td>
-                                <td>{{item.Colors}}</td>
+                                <td>{{item.ColorsName}}</td>
                                 <td>{{item.Size}}</td>
 
                                 <td>
@@ -119,11 +123,17 @@
                                 </code>
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="district">Category</label>
-                                <select id="district" name="district" class="form-control" ng-model="product.CategoryID" ng-required="true">
+                                <label for="district">Type</label>
+                                <select id="district" name="district" class="form-control" ng-model="product.Type" ng-required="true" ng-change="GetCategory(product.Type)">
                                     <option value="1">Men</option>
                                     <option value="2">Women</option>
                                     <option value="3">Child</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="district">Category</label>
+                                <select id="district" name="district" class="form-control" ng-model="product.CategoryID" ng-required="true">
+                                    <option ng-value="item.CategoryID" ng-repeat="item in listCategory">{{item.Name}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12">
@@ -137,9 +147,12 @@
                                     <option value="XXL">XXL</option>
                                 </select>
                             </div>
+                            <code ng-show="form.price.$invalid && !form.price.$pristine" class="help-block">
+                                this field is required
+                            </code>
                             <div class="form-group col-md-12">
                                 <label>Price</label>
-                                <input name="price" type="text" class="form-control" ng-model="product.Price" ng-required="true" />
+                                <input name="price" type="number" class="form-control" ng-model="product.Price" ng-required="true" />
                                 <code ng-show="form.price.$invalid && !form.price.$pristine" class="help-block">
                                     this field is required
                                 </code>
@@ -158,14 +171,20 @@
                                     <option value="Y">Yelow</option>
                                 </select>
                             </div>
+                            <code ng-show="form.price.$invalid && !form.price.$pristine" class="help-block">
+                                this field is required
+                            </code>
                             <div class="form-group col-md-12">
-                                Description
                                 <label>Description</label>
                                 <textarea rows="4" type="text" class="form-control" ng-model="product.Description"></textarea>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Images</label>
-                                <input type="file" class="form-control" multiple>
+                                <label>Image</label>
+                                <input type="file" class="form-control" fileread="product.UpLoad" accept="image/jpg">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Image 2 </label>
+                                <input type="file" class="form-control" fileread="product.UpLoad2" accept="image/jpg">
                             </div>
                         </div>
                     </div>
