@@ -1,0 +1,112 @@
+﻿
+.pagination {
+    float: right;
+    margin-top: 5px;
+}
+
+    .pagination li a {
+        background: #fff;
+        color: #4e73df;
+        border: 1px solid #dddfeb;
+        padding: 6px 9px;
+        text-decoration: none;
+        margin: 1px;
+    }
+
+        .pagination li a:hover,
+        .pagination li.active a {
+            background: #4e73df;
+            border-color: #4e73df;
+            color: #fff
+        }
+
+    .pagination li.disabled a {
+        background: #fff;
+        color: #4e73df;
+        border: 1px solid #dddfeb;
+        cursor: not-allowed;
+    }
+
+.show-length {
+    padding: 10px 0px 0px 35px;
+}
+
+.icon-option i {
+    color: white;
+}
+
+.btn-add-new {
+    margin: 20px 0px 15px 35px;
+}
+
+.table-responsive {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 15px solid #c1c1c1;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+table thead tr th.sort {
+    cursor: pointer;
+}
+
+button.collapSearch {
+    display: block;
+    float:right;
+    margin-right:20px;
+    padding:8px 12px;
+    
+}
+.search form {
+    background: #eeeff2;
+    padding-bottom:10px;
+}
+.search .area-search {
+    margin: 0px;
+}
+
+.search .area-search {
+    padding:10px 20px;
+}
+form .btn-group {
+    margin: 0 auto;
+    display:table;
+}
+    form .btn-group button {
+        display: block;
+        float: left;
+        margin-right: 15px;
+    }

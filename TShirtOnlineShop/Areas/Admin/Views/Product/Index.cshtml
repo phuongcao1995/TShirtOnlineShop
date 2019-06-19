@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content" ng-controller="ProductController">
+    <!-- Topbar -->
+    @Html.Partial("~/Areas/Admin/Views/Shared/_Navbar.cshtml")
+    <!-- End of Topbar -->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Log List</h1>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="row">
+                <button class="btn btn-primary btn-add-new" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus"></i> Add </button>
+            </div>
+
+
+
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="70" class="sort" ng-click="sort('Name')">
+                                    Image
+                                    <span ng-show="sortKey=='Name'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('Name')">
+                                    Name
+                                    <span ng-show="sortKey=='Name'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Code
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Category
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('NotificationDate')">
+                                    Price
+                                    <span ng-show="sortKey=='NotificationDate'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentDate')">
+                                    Color
+                                    <span ng-show="sortKey=='IncidentDate'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('DistrictName')">
+                                    Size
+                                    <span ng-show="sortKey=='DistrictName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+
+
+                                <th>
+                                    Option
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in listProduct |orderBy:sortKey:reverse| itemsPerPage:itemsPerPage" ng-show="listProduct.length>0">
+                                <td><img width="50" height="50" src="{{item.ImagesName[0]}}"/></td>
+                                <td> {{item.Name}}</td>
+                                <td>{{item.Code}}</td>
+                                <td>{{item.CategoryName}}</td>
+                                <td>{{item.Price |currency}}</td>
+                                <td>{{item.Colors}}</td>
+                                <td>{{item.Size}}</td>
+
+                                <td>
+                                    <a class="btn btn-primary icon-option" data-toggle="modal" data-target="#updateLog" ng-click="OpenModalUpdate(item)">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger icon-option" data-toggle="modal" data-target="#deleteLog" ng-click="OpenModalDelete(item)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="listLog.length==0">
+                        <h6 class="no-data"></h6>
+                    </div>
+                </div>
+                <dir-pagination-controls class="pagination" max-size="5" direction-links="true" boundary-links="true">
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addProduct">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form name="form" method="post" ng-submit="AddProduct(product,'#addProduct')">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Product</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" ng-model="product.Name" ng-required="true" maxlength="100" />
+                                <code ng-show="form.name.$invalid && !form.name.$pristine" class="help-block">
+                                    this field is required
+                                </code>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Code</label>
+                                <input type="text" name="code" class="form-control" ng-model="product.Code" ng-required="true" maxlength="100" />
+                                <code ng-show="form.code.$invalid && !form.code.$pristine" class="help-block">
+                                    this field is required
+                                </code>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="district">Category</label>
+                                <select id="district" name="district" class="form-control" ng-model="product.CategoryID" ng-required="true">
+                                    <option value="1">Men</option>
+                                    <option value="2">Women</option>
+                                    <option value="3">Child</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="district">Size</label>
+                                <select id="district" name="district" class="form-control" ng-model="product.Size" ng-required="true">
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Price</label>
+                                <input name="price" type="text" class="form-control" ng-model="product.Price" ng-required="true" />
+                                <code ng-show="form.price.$invalid && !form.price.$pristine" class="help-block">
+                                    this field is required
+                                </code>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>PromotionPrice</label>
+                                <input type="text" class="form-control" ng-model="product.PromotionPrice" ng-required="true" />
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="district">Colors</label>
+                                <select id="district" name="district" class="form-control" ng-model="product.Colors" ng-required="true">
+                                    <option value="S">Red</option>
+                                    <option value="B">Black</option>
+                                    <option value="Y">Yelow</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                Description
+                                <label>Description</label>
+                                <textarea rows="4" type="text" class="form-control" ng-model="product.Description"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Images</label>
+                                <input type="file" class="form-control" multiple>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="updateLog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form name="formUpdate" ng-submit="UpdateLog(log,'#updateLog')">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Constants.UpdateLog</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Html.DisplayNameFor(model => model.Name)</label>
+                                <input type="text" name="name" class="form-control" ng-model="log.Name" ng-required="true" maxlength="100" />
+                                <code ng-show="formUpdate.name.$invalid && !formUpdate.name.$pristine" class="help-block">
+                                    String.Format(Constants.MessageRequired, Html.DisplayNameFor(model => model.Name))
+                                </code>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="district">Html.DisplayNameFor(model => model.IncidentTypeName)</label>
+                                <select id="district" name="district" class="form-control" ng-model="log.IncidentTypeId" ng-required="true">
+                                    <option ng-value="{{IncidentType.Id}}" ng-repeat="IncidentType in listIncidentType">{{IncidentType.Name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Html.DisplayNameFor(model => model.NotificationDate)</label>
+                                <input type="datetime-local" class="form-control" ng-model="log.NotificationDate" ng-required="true" />
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Html.DisplayNameFor(model => model.IncidentDate)</label>
+                                <input type="date" class="form-control" ng-model="log.IncidentDate" ng-required="true" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="district">Html.DisplayNameFor(model => model.DistrictName)</label>
+                                <select id="district" class="form-control" ng-required="true" ng-model="log.DistrictId">
+                                    <option ng-value="{{District.Id}}" ng-repeat="District in listDistrict">{{District.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-disabled="formUpdate.$invalid">Constants.Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Constants.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteLog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form name="formUpdate" ng-submit="DeleteLog(log,'#deleteLog')">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Constants.Delete</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <p> String.Format(Constants.MessageDelete, "log") <strong>{{log.Name}}</strong> ?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Constants.Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Constants.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
