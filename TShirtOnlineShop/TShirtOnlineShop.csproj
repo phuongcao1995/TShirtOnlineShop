@@ -141,9 +141,11 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ChildController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\WomenController.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1200,6 +1202,17 @@
     <Content Include="Views\Men\Detail.cshtml" />
     <Content Include="Views\Order\ShoppingCart.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Men\ShortSleeves.cshtml" />
+    <Content Include="Views\Men\PoloSleeves.cshtml" />
+    <Content Include="Views\Women\LongSleeves.cshtml" />
+    <Content Include="Views\Women\ShortSleeves.cshtml" />
+    <Content Include="Views\Women\PoloSleeves.cshtml" />
+    <Content Include="Views\Women\Croptop.cshtml" />
+    <Content Include="Views\Women\Detail.cshtml" />
+    <Content Include="Views\Women\Apple.cshtml" />
+    <Content Include="Views\Child\Boys.cshtml" />
+    <Content Include="Views\Child\Girls.cshtml" />
+    <Content Include="Views\Child\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TShirtOnlineShop.Models;
+using TShirtOnlineShop.ViewModel;
 
 namespace TShirtOnlineShop.Controllers
 {
@@ -16,8 +19,10 @@ namespace TShirtOnlineShop.Controllers
 
         public ActionResult HomePage()
         {
-            
-            return View();
+            var listBestSeller = db.Products.Where(x=>x.Status!=false).OrderByDescending(x => x.PromotionPrice).Take(6).ToList();
+            var list = db.Products.OrderByDescending(x => x.ID).ToList();
+            ViewBag.listBestSeller = Mapper.Map<List<ProductViewModel>>(listBestSeller);
+            return View(Mapper.Map<List<ProductViewModel>>(list));
         }
 
         public ActionResult MenShortSleeves()

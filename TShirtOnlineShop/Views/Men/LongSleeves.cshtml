@@ -1,11 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "LongSleeves";
+    ViewBag.Title = "Men Long Sleeves";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using PagedList.Mvc
-@using PagedList
-@model IPagedList<TShirtOnlineShop.Models.Product>
 
 @section css
 {
@@ -14,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 }
-
+<input type="hidden" id="type" value="@ViewBag.Type"/>
 <div id="content-products" ng-controller="MenController">
     <div id="bread-container-1">
         <ul class="breadcrumb1">
@@ -75,7 +72,7 @@
                         <h3>
                             SweetShirt: {{item.Name}}
                         </h3>
-                        <p>Price: {{item.Price| currency}}</p>
+                        <p>Price: {{(1-item.PromotionPrice/100)*item.Price|currency}}</p>
                     </div>
                 </a>
         </div>
@@ -85,11 +82,7 @@
 
         <div class="center">
             <div class="paging">
-                @*@Html.PagedListPager(Model, page =>
-                                                   Url.Action("LongSleeves", new
-                                                   {
-                                                       page,
-                                                   }), TShirtOnlineShop.Controllers.BaseController.PagedListOptions)*@
+              
             </div>
         </div>
 

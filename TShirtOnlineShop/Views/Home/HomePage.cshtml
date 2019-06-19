@@ -5,7 +5,10 @@
 @{
     ViewBag.Title = "Home";
 }
-
+@model  List<TShirtOnlineShop.ViewModel.ProductViewModel>
+@{
+    List<TShirtOnlineShop.ViewModel.ProductViewModel> listBestSeller = (List<TShirtOnlineShop.ViewModel.ProductViewModel>)ViewBag.listBestSeller;
+}
 @section css
 {
     <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
@@ -130,55 +133,55 @@
     <!-- jssor slider scripts-->
     <script type="text/javascript" src="~/Content/js/jssor.slider.min.js"></script>
     <script>
-            jQuery(document).ready(function ($) {
-                var options = {
-                    $AutoPlay: 1,
-                    $AutoPlaySteps: 1,
-                    $Idle: 2000,
-                    $PauseOnHover: 1,
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: 1,
+                $AutoPlaySteps: 1,
+                $Idle: 2000,
+                $PauseOnHover: 1,
 
-                    $ArrowKeyNavigation: 1,
-                    $SlideEasing: $Jease$.$OutQuint,
-                    $SlideDuration: 800,
-                    $MinDragOffsetToSlide: 20,
+                $ArrowKeyNavigation: 1,
+                $SlideEasing: $Jease$.$OutQuint,
+                $SlideDuration: 800,
+                $MinDragOffsetToSlide: 20,
 
-                    $SlideSpacing: 0,
-                    $UISearchMode: 1,
-                    $PlayOrientation: 1,
-                    $DragOrientation: 1,
+                $SlideSpacing: 0,
+                $UISearchMode: 1,
+                $PlayOrientation: 1,
+                $DragOrientation: 1,
 
-                    $ArrowNavigatorOptions: {
-                        $Class: $JssorArrowNavigator$,
-                        $ChanceToShow: 2,
-                        $Steps: 1
-                    },
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$,
+                    $ChanceToShow: 2,
+                    $Steps: 1
+                },
 
-                    $BulletNavigatorOptions: {
-                        $Class: $JssorBulletNavigator$,
-                        $ChanceToShow: 2,
-                        $Steps: 1,
-                        $SpacingX: 12,
-                        $Orientation: 1
-                    }
-                };
-
-                var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
-
-                function ScaleSlider() {
-                    var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-                    if (parentWidth) {
-                        jssor_slider1.$ScaleWidth(parentWidth - 30);
-                    } else
-                        window.setTimeout(ScaleSlider, 30);
+                $BulletNavigatorOptions: {
+                    $Class: $JssorBulletNavigator$,
+                    $ChanceToShow: 2,
+                    $Steps: 1,
+                    $SpacingX: 12,
+                    $Orientation: 1
                 }
-                ScaleSlider();
+            };
 
-                $(window).bind("load", ScaleSlider);
-                $(window).bind("resize", ScaleSlider);
-                $(window).bind("orientationchange", ScaleSlider);
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
 
-            });
+
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    jssor_slider1.$ScaleWidth(parentWidth - 30);
+                } else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+
+        });
     </script>
 
 
@@ -195,95 +198,26 @@
         </div>
 
         <div class="product-container-3-col">
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Men1.jpg" alt="" />
+            @foreach (var item in listBestSeller)
+            {
+                var url = item.Type == 1 ? "/Men/Detail/" : (item.Type == 2 ? "/Women/Detail/" : "/Child/Detail/");
+                <div class="item">
+                    <a href="@(url+item.ID.ToString())">
+                        <div class="wrap-product-~/Content/images">
+                            <div class="product-~/Content/images">
+                                <img src="@item.ImagesName[0]" alt="" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="product-caption">
-                        <h3>Men T-shirts</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Men2.jpg" alt="" />
+                        <div class="product-caption">
+                            <h3>@item.Name</h3>
+                            <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
                         </div>
-                    </div>
+                    </a>
+                </div>
+            }
 
-                    <div class="product-caption">
-                        <h3>Men T-shirts</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
 
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Men3.jpg" alt="" />
-                        </div>
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Men T-shirts</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Women1.jpg" alt="" />
-                        </div>
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short Sleeves: Strange Planet - Sleeping!</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Women2.jpg" alt="" />
-                        </div>
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short Sleeves: Melting Cat</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="wrap-product-~/Content/images">
-                        <div class="product-~/Content/images">
-                            <img src="~/Content/images/Women3.jpg" alt="" />
-                        </div>
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short Sleeves: I'm a Dogtor!</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-            </div>
         </div>
 
 
@@ -308,53 +242,23 @@
         </div>
 
         <div class="product-container-4-col">
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/men6.jpg" />
-                    <img src="~/Content/images/men6-1.jpg" />
-                </div>
+            @foreach (var item in Model.Where(x => x.Type == 1).Take(4))
+            {
+                <a href="/Men/Detail/@item.ID" >
+                    <div class="item-image-4-col">
+                        @foreach (var image in item.ImagesName)
+                        {
+                            <img src="@image" />
+                        }
 
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    </div>
 
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/men7.jpg" />
-                    <img src="~/Content/images/men7-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/men8.jpg" />
-                    <img src="~/Content/images/men8-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/men11.jpg" />
-                    <img src="~/Content/images/men11-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    <div class="product-caption">
+                        <h3>@item.Name</h3>
+                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                    </div>
+                </a>
+            }
         </div>
 
 
@@ -379,53 +283,23 @@
         </div>
 
         <div class="product-container-4-col">
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/Women6.jpg" />
-                    <img src="~/Content/images/Women6-1.jpg" />
-                </div>
+            @foreach (var item in Model.Where(x => x.Type == 2).Take(4))
+            {
+                <a href="/Women/Detail/@item.ID">
+                    <div class="item-image-4-col">
+                        @foreach (var image in item.ImagesName)
+                        {
+                            <img src="@image" />
+                        }
 
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    </div>
 
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/Women7.jpg" />
-                    <img src="~/Content/images/Women7-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/Women8.jpg" />
-                    <img src="~/Content/images/Women8-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/Women9.jpg" />
-                    <img src="~/Content/images/Women9-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    <div class="product-caption">
+                        <h3>@item.Name</h3>
+                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                    </div>
+                </a>
+            }
         </div>
 
 
@@ -451,53 +325,23 @@
         </div>
 
         <div class="product-container-4-col">
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/kid4.jpg" />
-                    <img src="~/Content/images/kid4-1.jpg" />
-                </div>
+            @foreach (var item in Model.Where(x => x.Type == 3).Take(4))
+            {
+                <a href="/Men/Detail/@item.ID">
+                    <div class="item-image-4-col">
+                        @foreach (var image in item.ImagesName)
+                        {
+                            <img src="@image" />
+                        }
 
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    </div>
 
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/kid5.jpg" />
-                    <img src="~/Content/images/kid5-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/kid6.jpg" />
-                    <img src="~/Content/images/kid6-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="item-image-4-col">
-                    <img src="~/Content/images/kid7.jpg" />
-                    <img src="~/Content/images/kid7-1.jpg" />
-                </div>
-
-                <div class="product-caption">
-                    <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                    <p>Price: $19.00</p>
-                </div>
-            </a>
+                    <div class="product-caption">
+                        <h3>@item.Name</h3>
+                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                    </div>
+                </a>
+            }
         </div>
     </div>
 </div>

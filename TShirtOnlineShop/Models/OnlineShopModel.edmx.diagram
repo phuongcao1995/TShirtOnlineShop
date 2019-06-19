@@ -9,13 +9,13 @@
         <EntityTypeShape EntityType="OnlineShopModel.Customer" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineShopModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineShopModel.Order" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShopModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="OnlineShopModel.FK__Product__Status__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineShopModel.FK__Orders__Status__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Produ__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Quant__4222D4EF" ManuallyRouted="false" />
         <EntityTypeShape EntityType="OnlineShopModel.Image" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="OnlineShopModel.Product" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="OnlineShopModel.FK__Product__Status__3C69FB99" />
         <AssociationConnector Association="OnlineShopModel.FK__Image__Status__4F7CD00D" />
+        <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Produ__4316F928" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

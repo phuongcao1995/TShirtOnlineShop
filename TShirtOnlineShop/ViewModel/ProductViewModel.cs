@@ -19,7 +19,7 @@ namespace TShirtOnlineShop.ViewModel
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
         public List<string> ImagesName { get; set; }
         public List<int> ImagesID { get; set; }
         public string UpLoad { get; set; }

@@ -17,7 +17,7 @@ namespace TShirtOnlineShop.Areas.Admin
             context.MapRoute(
                "Admin_default",
                "Admin/{controller}/{action}/{id}",
-               new { controller = "Home", action = "index", id = UrlParameter.Optional },
+               new { controller = "product", action = "index", id = UrlParameter.Optional },
                 new[] { "TShirtOnlineShop.Areas.Admin.Controllers" }
            );
         }

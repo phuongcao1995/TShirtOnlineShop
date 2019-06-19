@@ -1,13 +1,14 @@
 ﻿(function () {
     var app = angular.module('App', ['angularUtils.directives.dirPagination']);
     app.controller('MenController', ['$scope', '$http', '$q', function ($scope, $http, $q) {
-        init();
+        init();    
         function init() {
-            LongSleeves();
+            var type = document.getElementById("type").value;
+            LongSleeves(type);
         };
-        function LongSleeves() {
+        function LongSleeves(type) {
             var $def = $q.defer();
-            $http.get('/Men/Data', { params: { type: 1}}).then(function (response) {
+            $http.get('/Men/Data', { params: { type: type}}).then(function (response) {
                 $def.resolve(response.data);
                 $scope.listData = response.data;
                 console.log($scope.listData);

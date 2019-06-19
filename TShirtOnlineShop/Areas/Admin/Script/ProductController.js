@@ -4,6 +4,7 @@
 
         init();
         function init() {
+            $scope.itemsPerPage = 10;
                 var $def = $q.defer();
                 $http.get('/Admin/Product/Data').then(function (response) {
                     $def.resolve(response.data);
@@ -43,49 +44,52 @@
             console.log(product);
             var $def = $q.defer();
             $http.post('/Admin/Product/AddProduct', { product: product }).then(function (response) {
-                $def.resolve(response.data);
-                $scope.listProduct = response.data;
+                init();
+                $(m).modal("hide");
+                $.notify("Added product successlly ", "success");
                 console.log($scope.listProduct);
             }, function () {
                 $def.reject('Error getting roles');
             });
             return $def.promise;
-           // $(m).modal("hide");
-            //homeService.AddLog(log).then(function (response) {
-            //   // ShowMessage(response);
-            //   // homeService.GetAllLog().then(ListLog).finally(commonService.EndLoading);
-               
-            //});
         };
 
-        $scope.OpenModalUpdate = function (log) {
-            log.NotificationDate = new Date(log.NotificationDate);
-            log.IncidentDate = new Date(log.IncidentDate);
-            $scope.log = angular.copy(log);
+        $scope.OpenModalEdit= function (product) {          
+            $scope.listCategory = $scope.GetCategory(product.Type);
+            $scope.product = angular.copy(product);
+            console.log($scope.product);
         };
 
-        $scope.OpenModalDelete = function (log) {
-            log.NotificationDate = new Date(log.NotificationDate);
-            log.IncidentDate = new Date(log.IncidentDate);
-            $scope.log = angular.copy(log);
+        $scope.OpenModalDelete = function (product) {
+            $scope.product = angular.copy(product);
         };
 
-        $scope.UpdateLog = function (log, m) {
-            commonService.StartLoading();
-            homeService.UpdateLog(log).then(function (response) {
-                ShowMessage(response);
-                homeService.GetAllLog().then(ListLog).finally(commonService.EndLoading);
+        $scope.EditProduct = function (product, m) {
+            console.log(product);
+            var $def = $q.defer();
+            $http.post('/Admin/Product/EditProduct', { product: product }).then(function (response) {
+                init();
                 $(m).modal("hide");
+                $.notify("Edited product successlly ", "success");
+                console.log($scope.listProduct);
+            }, function () {
+                $def.reject('Error getting roles');
             });
+            return $def.promise;
         };
 
-        $scope.DeleteLog = function (log, m) {
-            commonService.StartLoading();
-            homeService.DeleteLog(log).then(function (response) {
-                ShowMessage(response);
-                homeService.GetAllLog().then(ListLog).finally(commonService.EndLoading);
+        $scope.DeleteProduct = function (product, m) {
+            console.log(product);
+            var $def = $q.defer();
+            $http.post('/Admin/Product/DeleteProduct', { product: product }).then(function (response) {
+                init();
                 $(m).modal("hide");
+                $.notify("Deleted product successlly ", "success");
+                console.log($scope.listProduct);
+            }, function () {
+                $def.reject('Error getting roles');
             });
+            return $def.promise;
         };
  
 
