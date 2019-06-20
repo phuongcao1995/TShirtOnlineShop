@@ -74,7 +74,7 @@
 
                         <div class="input">
                             <label for="pwd"><b>Password</b></label>
-                            @Html.TextBoxFor(model => model.CustomerPassword, new { @type = "password", @name = "psw", @placeholder = "Password has at least 8 letters, includes digits and special letters" , required = "required" })
+                            @Html.TextBoxFor(model => model.CustomerPassword, new { @type = "password", @name = "psw", @placeholder = "Password has at least 6 letters, includes digits and special letters" , required = "required" })
                             @Html.ValidationMessageFor(model => model.CustomerPassword)
                             @*<input type="password" name="psw" placeholder="Password has at least 8 letters, includes digits and special letters" required>*@
                         </div>

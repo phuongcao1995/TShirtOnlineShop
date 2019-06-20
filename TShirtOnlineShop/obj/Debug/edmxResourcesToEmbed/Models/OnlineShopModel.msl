@@ -13,6 +13,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="OnlineShopModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
+          <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Images">
       <EntityTypeMapping TypeName="OnlineShopModel.Image">
         <MappingFragment StoreEntitySet="Image">
@@ -58,19 +71,6 @@
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="OnlineShopModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
-          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-          <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
-          <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

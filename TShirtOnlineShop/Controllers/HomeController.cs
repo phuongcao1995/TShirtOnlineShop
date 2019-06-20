@@ -83,7 +83,7 @@ namespace TShirtOnlineShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Customers.Add(customer);
+                customer.Type = 2;
                 db.Entry(customer).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("HomePage");

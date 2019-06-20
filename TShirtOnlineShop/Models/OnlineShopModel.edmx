@@ -21,12 +21,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerFullName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CustomerPhoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="CustomerEmail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CustomerPassword" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="Type" Type="int" />
-          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="CustomerFullName" Type="varchar" MaxLength="100" />
+          <Property Name="CustomerPhoneNumber" Type="varchar" MaxLength="100" />
+          <Property Name="CustomerEmail" Type="varchar" MaxLength="100" />
+          <Property Name="CustomerPassword" Type="varchar" MaxLength="100" />
+          <Property Name="Type" Type="int" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -85,18 +85,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Order__1CF15040">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__OrderDeta__Produ__4316F928">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -109,7 +97,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Customer__1DE57479">
+        <Association Name="FK__OrderDeta__Quant__4222D4EF">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__7B5B524B">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,15 +144,15 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Image" EntitySet="Image" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__1CF15040" Association="Self.FK__OrderDeta__Order__1CF15040">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Produ__4316F928" Association="Self.FK__OrderDeta__Produ__4316F928">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Customer__1DE57479" Association="Self.FK__Orders__Customer__1DE57479">
+          <AssociationSet Name="FK__OrderDeta__Quant__4222D4EF" Association="Self.FK__OrderDeta__Quant__4222D4EF">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__7B5B524B" Association="Self.FK__Orders__Customer__7B5B524B">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
@@ -167,6 +167,7 @@
       <Schema Namespace="OnlineShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OnlineShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="OnlineShopModel.Category" />
+          <EntitySet Name="Customers" EntityType="OnlineShopModel.Customer" />
           <EntitySet Name="Images" EntityType="OnlineShopModel.Image" />
           <EntitySet Name="OrderDetails" EntityType="OnlineShopModel.OrderDetail" />
           <EntitySet Name="Orders" EntityType="OnlineShopModel.Order" />
@@ -175,22 +176,21 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK__Orders__Status__3F466844" Association="OnlineShopModel.FK__Orders__Status__3F466844">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK__Image__Status__4F7CD00D" Association="OnlineShopModel.FK__Image__Status__4F7CD00D">
             <End Role="Product" EntitySet="Products" />
             <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__1CF15040" Association="OnlineShopModel.FK__OrderDeta__Order__1CF15040">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Produ__4316F928" Association="OnlineShopModel.FK__OrderDeta__Produ__4316F928">
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
-          <EntitySet Name="Customers" EntityType="OnlineShopModel.Customer" />
-          <AssociationSet Name="FK__Orders__Customer__1DE57479" Association="OnlineShopModel.FK__Orders__Customer__1DE57479">
-            <End Role="Customer" EntitySet="Customers" />
+          <AssociationSet Name="FK__OrderDeta__Quant__4222D4EF" Association="OnlineShopModel.FK__OrderDeta__Quant__4222D4EF">
             <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -204,6 +204,19 @@
           <Property Name="CreatedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="OnlineShopModel.FK__Product__Status__3C69FB99" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerPhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="OnlineShopModel.FK__Orders__Status__3F466844" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -223,8 +236,8 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="OnlineShopModel.FK__OrderDeta__Order__1CF15040" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="OnlineShopModel.FK__OrderDeta__Produ__4316F928" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="OnlineShopModel.FK__OrderDeta__Quant__4222D4EF" FromRole="OrderDetail" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -235,8 +248,8 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="OrderDetails" Relationship="OnlineShopModel.FK__OrderDeta__Order__1CF15040" FromRole="Order" ToRole="OrderDetail" />
-          <NavigationProperty Name="Customer" Relationship="OnlineShopModel.FK__Orders__Customer__1DE57479" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="OnlineShopModel.FK__Orders__Status__3F466844" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderDetails" Relationship="OnlineShopModel.FK__OrderDeta__Quant__4222D4EF" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -270,6 +283,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Orders__Status__3F466844">
+          <End Type="OnlineShopModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="OnlineShopModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Image__Status__4F7CD00D">
           <End Type="OnlineShopModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="OnlineShopModel.Image" Role="Image" Multiplicity="*" />
@@ -279,18 +304,6 @@
             </Principal>
             <Dependent Role="Image">
               <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__OrderDeta__Order__1CF15040">
-          <End Type="OnlineShopModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="OnlineShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -306,28 +319,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerFullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerPhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerPassword" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="OnlineShopModel.FK__Orders__Customer__1DE57479" FromRole="Customer" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK__Orders__Customer__1DE57479">
-          <End Type="OnlineShopModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="OnlineShopModel.Order" Role="Order" Multiplicity="*" />
+        <Association Name="FK__OrderDeta__Quant__4222D4EF">
+          <End Type="OnlineShopModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="OnlineShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Order">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerID" />
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,6 +345,19 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
+                <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -394,19 +407,6 @@
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="OnlineShopModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
-                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-                <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
-                <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
