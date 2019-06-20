@@ -14,9 +14,46 @@ namespace TShirtOnlineShop.Controllers
     {
         private OnlineShopEntities db = new OnlineShopEntities();
 
-        public ActionResult Checkout()
+        public ActionResult Shipping()
         {
+            ViewBag.total = TempData["total"];
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CheckOutOrder(List<CartViewModel> ShoppingCart)
+        {
+            //List<CartViewModel> cartViewModel = new List<CartViewModel>();
+            //HttpCookie Cookie = HttpContext.Request.Cookies["CartCookie"];// lấy cookie
+            //string ValueCookie = Server.UrlDecode(Cookie.Value);//Decode dịch ngược mã  các ký tự đặc biệt tham khảo http://www.aspnut.com/reference/encoding.asp
+            //cartViewModel = JsonConvert.DeserializeObject<List<CartViewModel>>(ValueCookie);// convert json to  list object  
+
+            Order order = new Order()
+            {
+                CustomerID = (Session["customer"] as Customer).ID,
+                Status = "ordered"
+            };
+
+            db.Orders.Add(order);
+            db.SaveChanges();
+            decimal? total = 0;
+            foreach (var item in ShoppingCart)
+            {
+                var product = db.Products.Find(item.ProductID);
+                total += (1 - product.PromotionPrice/100) * product.Price * item.Quantity;
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderID = order.ID,
+                    ProductID = item.ProductID,
+                    Quantity = item.Quantity,
+
+                };
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+            }
+            TempData["total"] =  decimal.Parse("1.1") *total;
+            Response.Cookies["CartCookie"].Value = "[]";
+            return Json("");
         }
 
         public ActionResult ShoppingCart()
@@ -103,7 +140,7 @@ namespace TShirtOnlineShop.Controllers
             string ValueCookie = Server.UrlDecode(Cookie.Value);//Decode dịch ngược mã  các ký tự đặc biệt tham khảo http://www.aspnut.com/reference/encoding.asp
             ViewBag.ValueCookie = ValueCookie;// show value cookie to View
             cartViewModel = JsonConvert.DeserializeObject<List<CartViewModel>>(ValueCookie);// convert json to  list object
-            cartViewModel.Remove(cartViewModel.FirstOrDefault(x => x.ProductID == productId));           
+            cartViewModel.Remove(cartViewModel.FirstOrDefault(x => x.ProductID == productId));
             foreach (var item in cartViewModel)
             {
                 item.Product = Mapper.Map<ProductViewModel>(db.Products.Find(item.ProductID));

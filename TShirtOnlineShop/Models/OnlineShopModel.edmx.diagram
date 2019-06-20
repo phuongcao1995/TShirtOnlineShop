@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ca0a03ced0924457a2557f1e58d4a195" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineShopModel.Category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShopModel.Customer" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShopModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShopModel.Order" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="OnlineShopModel.FK__Orders__Status__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Quant__4222D4EF" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="OnlineShopModel.Image" Width="1.5" PointX="5.25" PointY="5" />
-        <EntityTypeShape EntityType="OnlineShopModel.Product" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="OnlineShopModel.Category" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="OnlineShopModel.Image" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="OnlineShopModel.OrderDetail" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="OnlineShopModel.Order" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="OnlineShopModel.Product" Width="1.5" PointX="3" PointY="1.625" />
         <AssociationConnector Association="OnlineShopModel.FK__Product__Status__3C69FB99" />
         <AssociationConnector Association="OnlineShopModel.FK__Image__Status__4F7CD00D" />
+        <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Order__1CF15040" />
         <AssociationConnector Association="OnlineShopModel.FK__OrderDeta__Produ__4316F928" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customer" Width="1.5" PointX="0.75" PointY="7.25" />
+        <AssociationConnector Association="OnlineShopModel.FK__Orders__Customer__1DE57479" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

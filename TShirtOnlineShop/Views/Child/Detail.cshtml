@@ -86,16 +86,16 @@
                     </div>
                 </div>
                 @*<div id="quantity-container">
-                        <div id="title-PD">Quantity:</div>
-                        <div class="box-quantity">
-                            <div data-value="choose" class="select-quantity">
-                                <input type="number" name="quantity" value="choose" min="1" max="">
-                            </div>
-                        </div>
-                    </div>*@
-                <div id="addcart-container">
-                    <button type="submit" class="addCart my-cart-btn" title="addtoCart" ng-click="AddCart(productDetail.ID,productDetail.Name)">ADD TO CART</button>
+                <div id="title-PD">Quantity:</div>
+                <div class="box-quantity">
+                    <div data-value="choose" class="select-quantity">
+                        <input type="number" name="quantity" value="choose" min="1" max="">
+                    </div>
                 </div>
+            </div>*@
+            <div id="addcart-container">
+                <button id="addCart" type="submit" class="addCart my-cart-btn" title="addtoCart" ng-click="AddCart(productDetail.ID,productDetail.Name)">ADD TO CART</button>
+                <span id="plus" style="display:none;font-size:25px; padding:15px "><strong>+1<i></i> </strong> </span>
             </div>
         </div>
         <div class="detail-container-1-col">
@@ -151,51 +151,15 @@
         <div class="detail-container-1-col">
             <div id="title-PD">Related Products</div>
             <div class="product-container-4-col">
-                <a href="#">
+                <a href="/Child/Detail/{{item.ID}}" ng-repeat="item in anotherProduct">
                     <div class="item-image-4-col">
-                        <img src="~/Content/images/men6.jpg" />
-                        <img src="~/Content/images/men6-1.jpg" />
+                        <img src="{{image}}" ng-repeat="image in item.ImagesName" />
                     </div>
-
                     <div class="product-caption">
-                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="item-image-4-col">
-                        <img src="~/Content/images/men7.jpg" />
-                        <img src="~/Content/images/men7-1.jpg" />
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="item-image-4-col">
-                        <img src="~/Content/images/men8.jpg" />
-                        <img src="~/Content/images/men8-1.jpg" />
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                        <p>Price: $19.00</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="item-image-4-col">
-                        <img src="~/Content/images/men11.jpg" />
-                        <img src="~/Content/images/men11-1.jpg" />
-                    </div>
-
-                    <div class="product-caption">
-                        <h3>Short sleeves: Strange Plannet - Greeting</h3>
-                        <p>Price: $19.00</p>
+                        <h3>
+                            SweetShirt: {{item.Name}}
+                        </h3>
+                        <p>Price: {{(1-item.PromotionPrice/100)*item.Price|currency}}</p>
                     </div>
                 </a>
             </div>
@@ -206,8 +170,3 @@
 
 
 </div>
-@section angularjs
-{
-    <script src="~/Scripts/angularjs/MenController.js"></script>
-    <script src="~/Scripts/angularjs/DetailController.js"></script>
-}

@@ -18,6 +18,11 @@ namespace TShirtOnlineShop.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult Index()
         {
+            var customer = Session["Customer"] as Customer;
+            if (customer == null || customer.Type != 1)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
             return View();
         }
         public JsonResult Data()

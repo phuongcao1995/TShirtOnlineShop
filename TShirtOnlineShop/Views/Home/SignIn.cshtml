@@ -1,4 +1,4 @@
-﻿@model  TShirtOnlineShop.Models.CUSTOMER
+﻿@model  TShirtOnlineShop.Models.Customer
 
 @{
     Layout = null;
@@ -62,8 +62,9 @@
                         <div class="text-link">
                             <a>@Html.ActionLink("Create new account", "SignUp", "Home")</a> <br>
                         </div>
-
+                              
                         <button type="submit">Sign In</button>
+                        <code style="color:red"> @Html.ValidationSummary(true, "", new { @class = "text-danger" }) </code>
                     </div>
                 </form>
             </div>

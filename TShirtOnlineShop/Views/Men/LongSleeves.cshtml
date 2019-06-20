@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 }
-<input type="hidden" id="type" value="@ViewBag.Type"/>
+<input type="hidden" id="type" value="@ViewBag.Type" />
 <div id="content-products" ng-controller="MenController">
     <div id="bread-container-1">
         <ul class="breadcrumb1">
@@ -28,53 +28,52 @@
 
     <div class="filter-container">
         <div class="select-option">
-            <select>
-                <option value="Sizes"> Sizes </option>
+            <select ng-model="search.size">
+                <option value=""> Sizes </option>
+                <option value="XXXL"> XXXL </option>
                 <option value="XXL"> XXL </option>
                 <option value="XL"> XL  </option>
                 <option value="L"> L   </option>
-                <option value="M"> M   </option>
-                <option value="XM"> S </option>
-                <option value="XM"> XS </option>
+                <option value="S"> S </option>
+                <option value="M"> M </option>
             </select>
         </div>
         <div class="select-option">
-            <select>
-                <option value="Colors"> Colors </option>
-                <option value="Blue"> Blue </option>
-                <option value="Gray"> Gray </option>
-                <option value="Black"> Black   </option>
-                <option value="White"> White  </option>
-                <option value="Red"> Red </option>
+            <select ng-model="search.colors">
+                <option value=""> Colors </option>
+                <option value="Y"> Yellow </option>
+                <option value="B"> Black   </option>
+                <option value="R"> Red </option>
             </select>
         </div>
         <div class="select-option">
-            <select>
-                <option value="Price"> Price </option>
-                <option value="High"> High Price </option>
-                <option value="Medium"> Medium Price </option>
-                <option value="Low"> Low Price   </option>
+            <select ng-model="search.price">
+                <option value=""> Price </option>
+                <option value="3"> High Price </option>
+                <option value="2"> Medium Price </option>
+                <option value="1"> Low Price   </option>
             </select>
         </div>
         <div class="select-option">
-            <button id="findBtn" type="button" name="button" title="Find suitable product">Find</button>
+            <button id="findBtn" ng-click="Find(search)" type="button" name="button" title="Find suitable product">Find</button>
         </div>
+
     </div>
 
     <div class="content-categories">
 
         <div class="product-container-4-col">
-                <a href="Detail/{{item.ID}}" ng-repeat="item in listData">
-                    <div class="item-image-4-col" >
-                            <img src="{{image}}" ng-repeat="image in item.ImagesName" />
-                    </div>
-                    <div class="product-caption">
-                        <h3>
-                            SweetShirt: {{item.Name}}
-                        </h3>
-                        <p>Price: {{(1-item.PromotionPrice/100)*item.Price|currency}}</p>
-                    </div>
-                </a>
+            <a href="Detail/{{item.ID}}" ng-repeat="item in listData">
+                <div class="item-image-4-col">
+                    <img src="{{image}}" ng-repeat="image in item.ImagesName" />
+                </div>
+                <div class="product-caption">
+                    <h3>
+                        SweetShirt: {{item.Name}}
+                    </h3>
+                    <p>Price: {{(1-item.PromotionPrice/100)*item.Price|currency}}</p>
+                </div>
+            </a>
         </div>
 
 
@@ -82,13 +81,9 @@
 
         <div class="center">
             <div class="paging">
-              
+
             </div>
         </div>
 
     </div>
 </div>
-@section angularjs
-{
-    <script src="~/Scripts/angularjs/MenController.js"></script>
-}

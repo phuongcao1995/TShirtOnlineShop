@@ -211,7 +211,7 @@
 
                         <div class="product-caption">
                             <h3>@item.Name</h3>
-                            <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                            <p>Price: $@string.Format("{0:#.00}", (1 - item.PromotionPrice / 100) * item.Price)</p>
                         </div>
                     </a>
                 </div>
@@ -255,7 +255,7 @@
 
                     <div class="product-caption">
                         <h3>@item.Name</h3>
-                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                        <p>Price: $@string.Format("{0:#.00}", (1 - item.PromotionPrice / 100) * item.Price)</p>
                     </div>
                 </a>
             }
@@ -296,7 +296,7 @@
 
                     <div class="product-caption">
                         <h3>@item.Name</h3>
-                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                        <p>Price: $@string.Format("{0:#.00}", (1 - item.PromotionPrice / 100) * item.Price)</p>
                     </div>
                 </a>
             }
@@ -338,7 +338,7 @@
 
                     <div class="product-caption">
                         <h3>@item.Name</h3>
-                        <p>Price: $@string.Format("{0:#.00}", item.Price)</p>
+                        <p>Price: $@string.Format("{0:#.00}", (1 - item.PromotionPrice / 100) * item.Price)</p>
                     </div>
                 </a>
             }

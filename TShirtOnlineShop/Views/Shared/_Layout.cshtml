@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var customerLogin = (TShirtOnlineShop.Models.Customer)Session["customer"];
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -66,12 +69,13 @@
 
         @using (Html.BeginForm("HomePage", "Home", FormMethod.Post))
         {
-            if (Session["CustomerFullName"] != null)
+            if (customerLogin != null)
             {
                 <ul class="nav-link">
-                    <li class="nav-item"><a>Hello @Session["CustomerFullName"].ToString()</a></li>
-                    <li class="nav-item"><a href=" ~/Home/ShoppingCart"><i class="fa fa-opencart"></i></a></li>
+                    <li class="nav-item"><a>Hello @customerLogin.CustomerFullName</a></li>
+                    <li class="nav-item"><a href=" ~/Order/ShoppingCart"><i class="fa fa-shopping-cart"></i></a></li>
                     <li class="nav-item"><a href=" ~/Home/SearchBar"><i class="fa fa-search"></i></a></li>
+                    <li class="nav-item"><a href=" ~/Home/Logout">Log out</a></li>
                 </ul>
             }
             else
@@ -145,7 +149,15 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/angular.js"></script>
+    @Scripts.Render("~/bundles/angularjs")
     <script src="~/Content/lib/dirPagination.js"></script>
-    @RenderSection("angularjs", required: false)
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#addCart", function () {
+                $("#plus").fadeIn(300);
+                $("#plus").fadeOut(700);
+            })
+        })
+    </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 
 using System.Linq;
@@ -19,7 +20,7 @@ namespace TShirtOnlineShop.Controllers
 
         public ActionResult HomePage()
         {
-            var listBestSeller = db.Products.Where(x=>x.Status!=false).OrderByDescending(x => x.PromotionPrice).Take(6).ToList();
+            var listBestSeller = db.Products.Where(x => x.Status != false).OrderByDescending(x => x.PromotionPrice).Take(6).ToList();
             var list = db.Products.OrderByDescending(x => x.ID).ToList();
             ViewBag.listBestSeller = Mapper.Map<List<ProductViewModel>>(listBestSeller);
             return View(Mapper.Map<List<ProductViewModel>>(list));
@@ -31,6 +32,10 @@ namespace TShirtOnlineShop.Controllers
         }
         public ActionResult SignIn()
         {
+            if (Session["Customer"] != null)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
             return View();
         }
         public ActionResult SignUp()
@@ -45,66 +50,53 @@ namespace TShirtOnlineShop.Controllers
 
         public ActionResult SearchBar()
         {
-            return View();  
+            return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn([Bind(Include = "CustomerEmail, CustomerPassword")]Customer customer)
+        public ActionResult SignIn(Customer customer)
         {
-            if (function.SignInSuccess(customer.CustomerEmail, customer.CustomerPassword))
+
+            if (ModelState.IsValid)
             {
-                string CustomerFullName = function.GetCustomerFullName(customer.CustomerEmail);
-                Session["CustomerFullName"] = CustomerFullName;
+                var customerLogin = db.Customers.Where(x => x.CustomerEmail == customer.CustomerEmail && x.CustomerPassword == customer.CustomerPassword);
+                if (customerLogin.Count() == 0)
+                {
+                    ModelState.AddModelError("", "Customer doesn't exist");
+                    return View();
+                }
+                else
+                {
+                    Session["customer"] = customerLogin.FirstOrDefault();
+                    return RedirectToAction("HomePage", "Home");
+                }
+            }
+            ModelState.AddModelError("", "Email or Password is not correct");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Customers.Add(customer);
+                db.Entry(customer).State = EntityState.Added;
+                db.SaveChanges();
                 return RedirectToAction("HomePage");
             }
-            else
-            {
-                return View("SignIn");
-            }
+
+            return View("SignUp");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SignUp([Bind(Include = "CustomerID,CustomerFullName,CustomerPhoneNumber,CustomerEmail,CustomerPassword")]Customer customer)
+        public ActionResult Logout()
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    customer.ID = 1;
-
-                    if (function.IsUserExist(customer.CustomerEmail))
-                    {
-                        ModelState.AddModelError("CustomerEmail", "This email had already registered");
-                        return View("SignUp");
-                    }
-                    else
-                    {
-                        db.Customers.Add(customer);
-                        db.SaveChanges();
-                        string CustomerFullName = function.GetCustomerFullName(customer.CustomerEmail);
-                        Session["CustomerFullName"] = CustomerFullName;
-                        return RedirectToAction("HomePage");
-                    }
-                }
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                //throw;
-            }
-            return View("SignUp");
+            Session.Abandon();
+            Response.Cookies["CartCookie"].Value = "[]";
+            return RedirectToAction("HomePage", "Home");
         }
     }
 }
