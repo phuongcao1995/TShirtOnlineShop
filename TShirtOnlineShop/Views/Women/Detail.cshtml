@@ -86,15 +86,16 @@
                     </div>
                 </div>
                 @*<div id="quantity-container">
-                        <div id="title-PD">Quantity:</div>
-                        <div class="box-quantity">
-                            <div data-value="choose" class="select-quantity">
-                                <input type="number" name="quantity" value="choose" min="1" max="">
-                            </div>
-                        </div>
-                    </div>*@
+            <div id="title-PD">Quantity:</div>
+            <div class="box-quantity">
+                <div data-value="choose" class="select-quantity">
+                    <input type="number" name="quantity" value="choose" min="1" max="">
+                </div>
+            </div>
+        </div>*@
                 <div id="addcart-container">
-                    <button type="submit" class="addCart my-cart-btn" title="addtoCart" ng-click="AddCart(productDetail.ID,productDetail.Name)">ADD TO CART</button>
+                    <button id="addCart" type="submit" class="addCart my-cart-btn" title="addtoCart" ng-click="AddCart(productDetail.ID,productDetail.Name)">ADD TO CART</button>
+                    <span id="plus" style="display:none;font-size:25px; padding:15px "><strong>+1<i></i> </strong> </span>
                 </div>
             </div>
         </div>

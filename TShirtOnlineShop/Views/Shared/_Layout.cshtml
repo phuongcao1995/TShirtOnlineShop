@@ -151,5 +151,13 @@
     <script src="~/Scripts/angular.js"></script>
     @Scripts.Render("~/bundles/angularjs")
     <script src="~/Content/lib/dirPagination.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#addCart", function () {
+                $("#plus").fadeIn(300);
+                $("#plus").fadeOut(700);
+            })
+        })
+    </script>
 </body>
 </html>
