@@ -5,7 +5,16 @@
         function init() {
             ShoppingCart();
         };
-
+        $scope.CheckOut = function (ShoppingCart) {
+            var $def = $q.defer();
+            $http.post('/Order/CheckOutOrder', { ShoppingCart: ShoppingCart }).then(function (response) {
+                $def.resolve(response.data);
+                window.location.href = "/Order/Shipping";
+            }, function () {
+                $def.reject('Error getting roles');
+            });
+            return $def.promise;
+        }
         function ShoppingCart() {
             var $def = $q.defer();
             $http.get('/Order/GetShoppingCart').then(function (response) {
@@ -35,7 +44,7 @@
                 $scope.ShoppingCart = response.data;
                 $scope.Subtotal = function () {
                     var total = 0;
-                    for (var i = 0; i < $scope.ShoppingCart.length; i++) { 
+                    for (var i = 0; i < $scope.ShoppingCart.length; i++) {
                         var product = $scope.ShoppingCart[i].Product;
                         total += (1 - product.PromotionPrice / 100) * product.Price * $scope.ShoppingCart[i].Quantity;
                     }

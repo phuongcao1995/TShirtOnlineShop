@@ -21,12 +21,12 @@ namespace TShirtOnlineShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult CheckOutOrder()
+        public ActionResult CheckOutOrder(List<CartViewModel> ShoppingCart)
         {
-            List<CartViewModel> cartViewModel = new List<CartViewModel>();
-            HttpCookie Cookie = HttpContext.Request.Cookies["CartCookie"];// lấy cookie
-            string ValueCookie = Server.UrlDecode(Cookie.Value);//Decode dịch ngược mã  các ký tự đặc biệt tham khảo http://www.aspnut.com/reference/encoding.asp
-            cartViewModel = JsonConvert.DeserializeObject<List<CartViewModel>>(ValueCookie);// convert json to  list object  
+            //List<CartViewModel> cartViewModel = new List<CartViewModel>();
+            //HttpCookie Cookie = HttpContext.Request.Cookies["CartCookie"];// lấy cookie
+            //string ValueCookie = Server.UrlDecode(Cookie.Value);//Decode dịch ngược mã  các ký tự đặc biệt tham khảo http://www.aspnut.com/reference/encoding.asp
+            //cartViewModel = JsonConvert.DeserializeObject<List<CartViewModel>>(ValueCookie);// convert json to  list object  
 
             Order order = new Order()
             {
@@ -37,7 +37,7 @@ namespace TShirtOnlineShop.Controllers
             db.Orders.Add(order);
             db.SaveChanges();
             decimal? total = 0;
-            foreach (var item in cartViewModel)
+            foreach (var item in ShoppingCart)
             {
                 var product = db.Products.Find(item.ProductID);
                 total += (1 - product.PromotionPrice/100) * product.Price * item.Quantity;
@@ -53,7 +53,7 @@ namespace TShirtOnlineShop.Controllers
             }
             TempData["total"] =  decimal.Parse("1.1") *total;
             Response.Cookies["CartCookie"].Value = "[]";
-            return RedirectToAction("Shipping");
+            return Json("");
         }
 
         public ActionResult ShoppingCart()

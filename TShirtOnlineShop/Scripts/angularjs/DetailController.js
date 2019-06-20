@@ -11,7 +11,8 @@
             var $def = $q.defer();
             $http.get('/Men/ProductDetail', { params: { id: id } }).then(function (response) {
                 $def.resolve(response.data);
-                $scope.productDetail = response.data;
+                $scope.productDetail = response.data.product;
+                $scope.anotherProduct = response.data.anotherProduct;
                 console.log($scope.productDetail);
             }, function () {
                 $def.reject('Error getting roles');

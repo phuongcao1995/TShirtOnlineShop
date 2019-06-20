@@ -27,20 +27,25 @@ namespace TShirtOnlineShop.Controllers
         }
         public ActionResult Detail(int id)
         {
-            ViewBag.productId=id;
+            ViewBag.productId = id;
             return View();
         }
         public JsonResult Data(int? type)
         {
             var list = db.Products.Where(x => x.CategoryID == type).OrderByDescending(x => x.ID).ToList();
-             return Json(Mapper.Map<List<ProductViewModel>>(list), JsonRequestBehavior.AllowGet);
+            return Json(Mapper.Map<List<ProductViewModel>>(list), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductDetail(int id)
         {
             var product = db.Products.Find(id);
-            return Json(Mapper.Map<ProductViewModel>(product), JsonRequestBehavior.AllowGet);
-        }
+            var anotherProduct = db.Products.Where(x => x.Category.Type == product.Category.Type && x.Status != false && x.ID!= id).Take(4).ToList();
+            return Json(new
+            {
+                product = Mapper.Map<ProductViewModel>(product),
+                anotherProduct = Mapper.Map<List<ProductViewModel>>(anotherProduct)
+            },
+                JsonRequestBehavior.AllowGet);
 
-       
+        }
     }
 }

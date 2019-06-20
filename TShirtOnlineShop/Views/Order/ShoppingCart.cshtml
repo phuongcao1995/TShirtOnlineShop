@@ -78,7 +78,7 @@
                          var title = Session["customer"] == null ? "you have to sign in for checkout" : "";
                      }
                     <form method="post" action="/Order/CheckoutOrder">
-                        <button id="btnCheckOut" title="@title" type="submit" name="button" ng-click="CheckOut()" @(Session["customer"] == null ? "disabled" : "")> CHECKOUT</button>
+                        <button id="btnCheckOut" title="@title" type="button" name="button" ng-click="CheckOut(ShoppingCart)" @(Session["customer"] == null ? "disabled" : "")> CHECKOUT</button>
                     </form>
                     <style>
 
