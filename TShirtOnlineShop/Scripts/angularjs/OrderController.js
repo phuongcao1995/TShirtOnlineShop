@@ -15,18 +15,18 @@
                     var total = 0;
                     for (var i = 0; i < $scope.ShoppingCart.length; i++) {
                         var product = $scope.ShoppingCart[i].Product;
-                        total += (product.Price * $scope.ShoppingCart[i].Quantity);
+                        total += (1 - product.PromotionPrice / 100) * product.Price * $scope.ShoppingCart[i].Quantity;
                     }
                     return total;
                 }
-        
+
             }, function () {
                 $def.reject('Error getting roles');
             });
             return $def.promise;
         }
-  
- 
+
+
         $scope.removeProduct = function (productId) {
 
             var $def = $q.defer();
@@ -35,9 +35,9 @@
                 $scope.ShoppingCart = response.data;
                 $scope.Subtotal = function () {
                     var total = 0;
-                    for (var i = 0; i < $scope.ShoppingCart.length; i++) {
+                    for (var i = 0; i < $scope.ShoppingCart.length; i++) { 
                         var product = $scope.ShoppingCart[i].Product;
-                        total += (product.Price * $scope.ShoppingCart[i].Quantity);
+                        total += (1 - product.PromotionPrice / 100) * product.Price * $scope.ShoppingCart[i].Quantity;
                     }
                     return total;
                 }

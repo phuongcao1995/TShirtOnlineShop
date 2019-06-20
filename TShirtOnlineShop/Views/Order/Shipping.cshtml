@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Checkout";
+}
+@{
+    var customerLogin = (TShirtOnlineShop.Models.Customer)Session["customer"];
+}  
+
+  
+
+  @section css
+  {
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+<div id="content">
+
+    <div id="order-content">
+        <div class="column order-left">
+            <div class="wrap-order">
+                <div class="order-header">
+                    <h5><strong>Shipping Infor</strong></h5>
+                </div>
+                <form class="ship-infor" action="#" method="post">
+
+
+                    <div class="contact-container">
+
+                        <label for="fname">Full Name</label>
+                        <input type="text" name="fname" value="@customerLogin.CustomerFullName" required>
+
+                    </div>
+
+                    <div class="contact-container">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" value="@customerLogin.Address" required>
+                    </div>
+
+                    <div class="contact-container">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" value="@customerLogin.CustomerEmail">
+                    </div>
+
+                    <div class="contact-container">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" name="phone" value="@customerLogin.CustomerPhoneNumber">
+                    </div>
+
+                    <button type="button" name="button">Continue</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="column order-right">
+            <div class="wrap-order">
+                <div class="order-header">
+                    <h5><strong>Cart Infor</strong></h5>
+                </div>
+
+                <div id="item2">
+                    <div class="right-content">
+                        <div class="total">
+                            <div class="price-item">
+                                <div class="left">
+                                    <h4>Total</h4>
+                                </div>
+
+                                <div class="right">
+                                    <h4>$@ViewBag.total</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

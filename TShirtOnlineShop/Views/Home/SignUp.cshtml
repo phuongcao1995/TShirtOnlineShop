@@ -1,4 +1,4 @@
-﻿@model  TShirtOnlineShop.Models.CUSTOMER
+﻿@model  TShirtOnlineShop.Models.Customer
 
 @{
     Layout = null;
@@ -47,28 +47,34 @@
                     <div id="container">
                         <div class="input">
                             <label for="name"><b>Fullname</b></label>
-                            @Html.TextBoxFor(model => model.CustomerFullName, new { @type = "text", @name = "name", @placeholder = "Enter your full name" })
+                            @Html.TextBoxFor(model => model.CustomerFullName, new { @type = "text", @name = "name", @placeholder = "Enter your full name", required = "required" })
                             @Html.ValidationMessageFor(model => model.CustomerFullName)
                             @*<input type="text" name="name" placeholder="Enter your fullname" required>*@
                         </div>
 
                         <div class="input">
                             <label for="phone"><b>Phone number</b></label>
-                            @Html.TextBoxFor(model => model.CustomerPhoneNumber, new { @type = "text", @name = "phone", @placeholder = "Enter your phone number" })
+                            @Html.TextBoxFor(model => model.CustomerPhoneNumber, new { @type = "text", @name = "phone", @placeholder = "Enter your phone number" , required = "required" })
                             @Html.ValidationMessageFor(model => model.CustomerPhoneNumber)
                             @*<input type="text" name="phone" placeholder="Enter your phone number" required>*@
                         </div>
 
                         <div class="input">
+                            <label for="phone"><b>Address</b></label>
+                            @Html.TextBoxFor(model => model.Address, new { @type = "text", @name = "address", @placeholder = "Enter your address " , required = "required" })
+                            @Html.ValidationMessageFor(model => model.Address)
+                            @*<input type="text" name="phone" placeholder="Enter your phone number" required>*@
+                        </div>
+                        <div class="input">
                             <label for="username"><b>Email</b></label>
-                            @Html.TextBoxFor(model => model.CustomerEmail, new { @type = "email", @name = "username", @placeholder = "Enter your email " })
+                            @Html.TextBoxFor(model => model.CustomerEmail, new { @type = "email", @name = "username", @placeholder = "Enter your email ", required = "required" })
                             @Html.ValidationMessageFor(model => model.CustomerEmail)
                             @*<input type="email" name="username" placeholder="Enter your email">*@
                         </div>
 
                         <div class="input">
                             <label for="pwd"><b>Password</b></label>
-                            @Html.TextBoxFor(model => model.CustomerPassword, new { @type = "password", @name = "psw", @placeholder = "Password has at least 8 letters, includes digits and special letters" })
+                            @Html.TextBoxFor(model => model.CustomerPassword, new { @type = "password", @name = "psw", @placeholder = "Password has at least 8 letters, includes digits and special letters" , required = "required" })
                             @Html.ValidationMessageFor(model => model.CustomerPassword)
                             @*<input type="password" name="psw" placeholder="Password has at least 8 letters, includes digits and special letters" required>*@
                         </div>

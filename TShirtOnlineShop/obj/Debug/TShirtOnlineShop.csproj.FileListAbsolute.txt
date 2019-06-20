@@ -165,7 +165,6 @@ C:\Users\Acer\Desktop\DoAn\TShirtOnlineShop\TShirtOnlineShop\bin\PagedList.dll
 C:\Users\Acer\Desktop\DoAn\TShirtOnlineShop\TShirtOnlineShop\bin\PagedList.Mvc.dll
 C:\Users\Acer\Desktop\DoAn\TShirtOnlineShop\TShirtOnlineShop\bin\PagedList.xml
 C:\Users\Acer\Desktop\DoAn\TShirtOnlineShop\TShirtOnlineShop\bin\PagedList.Mvc.xml
-D:\Demo Technical\Tshirt_onlineshop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.csprojAssemblyReference.cache
 D:\Demo Technical\Tshirt_onlineshop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.csproj.CoreCompileInputs.cache
 D:\Demo Technical\Tshirt_onlineshop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.dll
 D:\Demo Technical\Tshirt_onlineshop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.pdb
@@ -339,3 +338,4 @@ E:\project\part time\TShirtOnlineShop\TShirtOnlineShop\TShirtOnlineShop\obj\Debu
 E:\project\part time\TShirtOnlineShop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.csproj.CopyComplete
 E:\project\part time\TShirtOnlineShop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.dll
 E:\project\part time\TShirtOnlineShop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.pdb
+D:\Demo Technical\Tshirt_onlineshop\TShirtOnlineShop\TShirtOnlineShop\obj\Debug\TShirtOnlineShop.csprojAssemblyReference.cache
