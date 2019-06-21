@@ -31,7 +31,8 @@ namespace TShirtOnlineShop.Controllers
             Order order = new Order()
             {
                 CustomerID = (Session["customer"] as Customer).ID,
-                Status = "ordered"
+                Status = "ordered",
+                CreatedDate = DateTime.Now
             };
 
             db.Orders.Add(order);
@@ -46,6 +47,7 @@ namespace TShirtOnlineShop.Controllers
                     OrderID = order.ID,
                     ProductID = item.ProductID,
                     Quantity = item.Quantity,
+                    
 
                 };
                 db.OrderDetails.Add(orderDetail);

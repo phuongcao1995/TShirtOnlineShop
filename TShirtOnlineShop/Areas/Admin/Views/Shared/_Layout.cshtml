@@ -55,8 +55,8 @@
                 Interface
             </div>
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <li class="nav-item" onclick="window.location.href='/Admin/Product/index'">
+                <a class="nav-link collapsed" href="/Admin/Product/index" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Product</span>
                 </a>
@@ -73,8 +73,8 @@
                     <span>User</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <li class="nav-item" onclick="window.location.href='/Admin/Order/index'">
+                <a class="nav-link collapsed" href="/Admin/Order/index" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Order</span>
                 </a>
@@ -130,7 +130,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/Admin/HOme/Logout" >Logout</a>
+                    <a class="btn btn-primary" href="/Admin/HOme/Logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -156,7 +156,9 @@
     @*<script src="~/Content/lib/js/demo/datatables-demo.js"></script>*@
     <script src="~/Content/lib/notify.js"></script>
     <script src="~/Content/lib/dirPagination.js"></script>
-    <script src="~/Areas/Admin/Script/ProductController.js"></script>
+    @RenderSection("Angularjs", false)
+
+
 </body>
 
 </html>

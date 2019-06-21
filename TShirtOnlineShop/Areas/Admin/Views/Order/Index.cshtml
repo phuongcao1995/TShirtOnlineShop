@@ -1,0 +1,117 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section AngularJs{
+    <script src="~/Areas/Admin/Script/OrderController .js"></script>
+}
+
+<div id="content" ng-controller="OrderController">
+    <!-- Topbar -->
+    @Html.Partial("~/Areas/Admin/Views/Shared/_Navbar.cshtml")
+    <!-- End of Topbar -->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Order List</h1>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            @*<div class="row">
+                    <button class="btn btn-primary btn-add-new" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus"></i> Add </button>
+                </div>*@
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Create At
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Customer Email
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+                                <th class="sort" ng-click="sort('IncidentTyleName')">
+                                    Total price
+                                    <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                </th>
+
+                                <th>
+                                    View Detail
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in listOrder |orderBy:sortKey:reverse| itemsPerPage:itemsPerPage" ng-show="listOrder.length>0">
+                                <td> {{item.CreatedDate}}</td>
+                                <td>{{item.CustomerEmail}}</td>
+                                <td>{{item.Total|currency}}</td>
+
+                                <td>
+                                    <a class="btn btn-primary icon-option" data-toggle="modal" data-target="#editProduct" ng-click="OpenViewDetail(item.OrderDetailViewModel)">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @*<dir-pagination-controls class="pagination" max-size="5" direction-links="true" boundary-links="true">*@
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editProduct">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Order Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="sort" ng-click="sort('IncidentTyleName')">
+                                        Product Name
+                                        <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                    </th>
+                                    <th class="sort" ng-click="sort('IncidentTyleName')">
+                                        Product Price
+                                        <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                    </th>
+                                    <th class="sort" ng-click="sort('IncidentTyleName')">
+                                        Quantity
+                                        <span ng-show="sortKey=='IncidentTyleName'" ng-class="{'fa fa-angle-down':reverse,'fa fa-angle-up':!reverse}"></span>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="item in orderDetail |orderBy:sortKey:reverse| itemsPerPage:itemsPerPage" ng-show="orderDetail.length>0">
+                                    <td> {{item.ProductName}}</td>
+
+                                    <td>{{item.ProductPrice|currency}}</td>
+                                    <td>{{item.Quantity}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+
+</div>
+

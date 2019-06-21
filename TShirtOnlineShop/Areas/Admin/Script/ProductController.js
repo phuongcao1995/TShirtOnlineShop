@@ -5,15 +5,15 @@
         init();
         function init() {
             $scope.itemsPerPage = 10;
-                var $def = $q.defer();
-                $http.get('/Admin/Product/Data').then(function (response) {
-                    $def.resolve(response.data);
-                    $scope.listProduct = response.data;
-                    console.log($scope.listProduct);
-                }, function () {
-                    $def.reject('Error getting roles');
-                });
-                return $def.promise;
+            var $def = $q.defer();
+            $http.get('/Admin/Product/Data').then(function (response) {
+                $def.resolve(response.data);
+                $scope.listProduct = response.data;
+                console.log($scope.listProduct);
+            }, function () {
+                $def.reject('Error getting roles');
+            });
+            return $def.promise;
 
         }
 
@@ -54,7 +54,7 @@
             return $def.promise;
         };
 
-        $scope.OpenModalEdit= function (product) {          
+        $scope.OpenModalEdit = function (product) {
             $scope.listCategory = $scope.GetCategory(product.Type);
             $scope.product = angular.copy(product);
             console.log($scope.product);
@@ -91,7 +91,7 @@
             });
             return $def.promise;
         };
- 
+
 
     }]).directive("fileread", [function () {
         return {
