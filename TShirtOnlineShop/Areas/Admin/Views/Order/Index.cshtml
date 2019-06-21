@@ -97,7 +97,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in orderDetail |orderBy:sortKey:reverse| itemsPerPage:itemsPerPage" ng-show="orderDetail.length>0">
+                                <tr ng-repeat="item in orderDetail">
                                     <td> {{item.ProductName}}</td>
 
                                     <td>{{item.ProductPrice|currency}}</td>
