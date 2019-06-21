@@ -4,7 +4,7 @@
 
         init();
         function init() {
-            //$scope.itemsPerPage = 10;
+            $scope.itemsPerPage = 10;
                 var $def = $q.defer();
                 $http.get('/Admin/Order/Data').then(function (response) {
                     $def.resolve(response);
