@@ -13,6 +13,7 @@ using TShirtOnlineShop.ViewModel;
 
 namespace TShirtOnlineShop.Controllers
 {
+    //Home controller
     public class HomeController : Controller
     {
         Function function = new Function();
