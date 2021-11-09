@@ -13,7 +13,7 @@ using TShirtOnlineShop.ViewModel;
 
 namespace TShirtOnlineShop.Controllers
 {
-    //Home controller
+    //Home controller 1
     public class HomeController : Controller
     {
         Function function = new Function();
@@ -31,6 +31,7 @@ namespace TShirtOnlineShop.Controllers
         {
             return View();
         }
+        //login 1
         public ActionResult SignIn()
         {
             if (Session["Customer"] != null)
