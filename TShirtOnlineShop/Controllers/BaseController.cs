@@ -9,6 +9,7 @@ namespace TShirtOnlineShop.Controllers
 {
     public class BaseController : Controller
     {
+        //comment1
         public static readonly PagedListRenderOptions PagedListOptions = new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Never,
