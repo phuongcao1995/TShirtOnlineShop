@@ -13,5 +13,9 @@ namespace TShirtOnlineShop.Controllers
         {
             return View();
         }
+        public ActionResult Update()
+        {
+            return View();
+        }
     }
 }
