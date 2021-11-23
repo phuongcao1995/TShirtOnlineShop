@@ -27,6 +27,7 @@ namespace TShirtOnlineShop.ViewModel
         public Nullable<decimal> PriceTotal { get; set; }
         public string Description { get; set; }
 		// public string Description { get; set; }
+		// public Nullable<decimal> PriceTotal { get; set; }
     }
 
 }
