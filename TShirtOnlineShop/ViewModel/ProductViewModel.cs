@@ -15,7 +15,7 @@ namespace TShirtOnlineShop.ViewModel
         public string Size { get; set; }
         public string Colors { get; set; }
         public string ColorsName => (Colors == "R") ? "Red" : ((Colors == "Y") ? "Yellow" : "Black");
-        public Nullable<decimal> PromotionPrice { get; set; }
+        public decimal? PromotionPrice { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
